@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SWT_DSL
+Bundle-SymbolicName: SWT_DSL
+Bundle-Version: 1.0.0
+Export-Package: .,
+ org.consultar.scala.swtdsl
+Require-Bundle: org.eclipse.core.databinding;bundle-version="1.2.0",
+ org.eclipse.core.runtime;bundle-version="[3.4.0,3.6.0)",
+ org.eclipse.core.databinding.beans;bundle-version="1.2.0",
+ com.ibm.icu;bundle-version="[3.8.1,4.1.0)",
+ org.eclipse.core.databinding.property;bundle-version="1.2.0",
+ org.eclipse.rap.rwt;bundle-version="[1.2.0,2.0.0)",
+ org.eclipse.rap.jface.databinding;bundle-version="[1.2.0,2.0.0)"
+Import-Package: org.eclipse.jface.databinding.swt,
+ org.eclipse.swt

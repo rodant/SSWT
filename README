@@ -1,0 +1,38 @@
+ScalaSWT is an open source library for the implementation of SWT/JFace applications. It makes possible to write GUI 
+code in a Scala DSL, which try to be more readable and concise than in plain Java. The library is currently experimental.
+
+You are free to use it or change it but it is on your own responsibility. I don't grant any guarantees for this software.
+
+The starting point was the contribution in:
+
+http://johlrogge.wordpress.com/2009/01/06/making-swt-shine-with-scala/
+
+I made some changes and add new stuff (like data binding) to this. One of the essential changes concerns the different 
+treatment for nodes in the component tree and attributes of this nodes. Nodes are written in an embedded way (in curly 
+braces), which reassembles the tree structure. Attributes are set as parameters of the node. Concerning this, it is like 
+Groovy's Swing builder or JavaFX. For this approach the builder tracks the current position in the component tree, it 
+stateful.
+
+Other design goals:
+- the target users are programmers, the DSL should not reassemble the natural language
+- code should be good readable, concise and declarative
+- make the use of Java models as easy as Scala ones, specially for data binding
+- use compiler type check as much as possible to avoid errors and obtain better IDE support
+- both, plain SWT/JFace and RCP applications should be supported
+
+I implemented the same example as in the refereed link above with the DSL and in plain
+Java to compare and have a feeling of the potential win. The Java code is
+larger, of course, but more relevant from my point of view is the readability
+aspect. I compared using "wc" the method buildGui() in the Java version with the
+equivalent Scala block and got this result:
+
+antonio@antonio-laptop:~/workspace_experimentos/SWT DSL/src$ wc java
+ 77  220 3414 java
+antonio@antonio-laptop:~/workspace_experimentos/SWT DSL/src$ wc scala
+ 35   96 1703 scala
+antonio@antonio-laptop:~/workspace_experimentos/SWT DSL/src$
+
+The numbers represents lines, words and chars.
+
+Enjoy it,
+Antonio R. Rodriguez Santiesteban.

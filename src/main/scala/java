@@ -1,0 +1,77 @@
+shell.setText("User Profil");
+		shell.setLayout(new GridLayout());
+		Composite composite = new Composite(shell, SWT.NONE);
+		composite.setLayout(new GridLayout(2, false));
+
+		DataBindingContext dbc = new DataBindingContext();
+
+		Group nameGroup = new Group(composite, SWT.NONE);
+		nameGroup.setText("Name");
+		nameGroup.setLayout(new GridLayout(2, false));
+		nameGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		new Label(nameGroup, SWT.NONE).setText("First:");
+		Text firstNameField = new Text(nameGroup, SWT.BORDER);
+		firstNameField.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
+				false));
+		dbc.bindValue(SWTObservables.observeText(firstNameField, SWT.Modify),
+				PojoObservables.observeValue(user, "firstName"), null, null);
+		new Label(nameGroup, SWT.NONE).setText("Last:");
+		Text lastNameField = new Text(nameGroup, SWT.BORDER);
+		lastNameField.setLayoutData(new GridData(SWT.FILL, SWT.NONE, true,
+				false));
+		dbc.bindValue(SWTObservables.observeText(lastNameField, SWT.Modify),
+				PojoObservables.observeValue(user, "lastName"), null, null);
+
+		Group genderGroup = new Group(composite, SWT.NONE);
+		genderGroup.setText("Gender");
+		genderGroup.setLayout(new RowLayout(SWT.HORIZONTAL));
+		genderGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		Button maleRadio = new Button(genderGroup, SWT.RADIO);
+		maleRadio.setText("Male");
+		dbc.bindValue(SWTObservables.observeSelection(maleRadio),
+				PojoObservables.observeValue(user, "male"), null, null);
+		Button femaleRadio = new Button(genderGroup, SWT.RADIO);
+		femaleRadio.setText("Female");
+
+		Group roleGroup = new Group(composite, SWT.NONE);
+		roleGroup.setText("Role");
+		roleGroup.setLayout(new RowLayout(SWT.HORIZONTAL));
+		roleGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		Button studentCheck = new Button(roleGroup, SWT.CHECK);
+		studentCheck.setText("Student");
+		dbc.bindValue(SWTObservables.observeSelection(studentCheck),
+				PojoObservables.observeValue(user, "student"), null, null);
+		Button employeeCheck = new Button(roleGroup, SWT.CHECK);
+		employeeCheck.setText("Employee");
+		dbc.bindValue(SWTObservables.observeSelection(employeeCheck),
+				PojoObservables.observeValue(user, "employee"), null, null);
+
+		Group experienceGroup = new Group(composite, SWT.NONE);
+		experienceGroup.setText("Experience");
+		experienceGroup.setLayout(new RowLayout(SWT.HORIZONTAL));
+		experienceGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true));
+		Spinner experienceSpinner = new Spinner(experienceGroup, SWT.NONE);
+		dbc.bindValue(SWTObservables.observeSelection(experienceSpinner),
+				PojoObservables.observeValue(user, "experience"), null, null);
+		new Label(experienceGroup, SWT.NONE).setText("years");
+
+		Button saveButton = new Button(composite, SWT.PUSH);
+		saveButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		saveButton.setText("save");
+		saveButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				System.out.println(user.toString());
+			}
+		});
+
+		Button closeButton = new Button(composite, SWT.PUSH);
+		closeButton.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		closeButton.setText("close");
+		closeButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				System.exit(0);
+			}
+		});
