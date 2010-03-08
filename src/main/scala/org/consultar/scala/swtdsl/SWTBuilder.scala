@@ -48,7 +48,7 @@ trait SWTBuilder extends Layouts with Styles with Binding {
   }
 
   def shell(setups: (Shell => Unit)*)(block: => Unit): Shell = {
-    val shell = new Shell(SWT.DEFAULT)
+    val shell = new Shell(SWT.SHELL_TRIM)
     setupShell(shell, block, setups: _*)
   }
 

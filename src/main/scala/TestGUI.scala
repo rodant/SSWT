@@ -2,7 +2,7 @@ import org.consultar.scala.swtdsl._
 
 object TestGUI {
   def main(args : Array[String]): Unit = {
-    object user {
+	  object user {
       var firstName = "Bullet"
       var lastName = "Tooth"
       var student = true

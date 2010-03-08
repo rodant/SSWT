@@ -1,5 +1,6 @@
 package org.consultar.scala.swtdsl
 
+import scala.reflect.BeanProperty
 import _root_.scala.collection.mutable.ListBuffer
 
 import org.eclipse.swt.SWT
@@ -39,16 +40,14 @@ trait Binding {
   protected def setupBindings() {
     bindings.foreach(binding => binding._2(binding._1))
   }
-  
-  private class ObservableProperty[T <: Any](val property: Property[T]) extends IObservableValue {
 
-    private val delegate = 
-      PojoObservables.observeValue(
-        new Object {
-          def setProperty(v: T) = property.setter(v)
-          def getProperty() = property.getter()
-        }, "property"
-      )
+  private class ObservableProperty[T <: Any](val property: Property[T]) extends IObservableValue {
+	private object Bean {
+	  def setProperty(v: T) = property.setter(v)
+	  def getProperty() = property.getter()
+	}
+
+    private val delegate = PojoObservables.observeValue(Bean, "property")
     
     override def addValueChangeListener(listener: IValueChangeListener) = delegate.addValueChangeListener(listener)
     

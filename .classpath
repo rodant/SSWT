@@ -4,11 +4,11 @@
 	<classpathentry kind="src" path="src/test/scala"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/home/antonio/Entwicklung/Scala/scalatest-1.0-SNAPSHOT/scalatest-1.0-SNAPSHOT.jar" sourcepath="/home/antonio/Entwicklung/Scala/scalatest-1.0-SNAPSHOT/src"/>
 	<classpathentry kind="lib" path="/home/antonio/Entwicklung/Java/testing/cglib-nodep-2.2.jar"/>
 	<classpathentry kind="lib" path="/home/antonio/Entwicklung/Java/testing/easymock2.4.zip"/>
 	<classpathentry kind="lib" path="/home/antonio/Entwicklung/Java/testing/easymockclassextension2.4.zip"/>
 	<classpathentry kind="con" path="ch.epfl.lamp.sdt.launching.SCALA_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/antonio/Entwicklung/Scala/scalatest-1.0.1-for-scala-2.8.0.Beta1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

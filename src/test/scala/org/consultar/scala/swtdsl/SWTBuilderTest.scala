@@ -1,5 +1,8 @@
 package org.consultar.scala.swtdsl
 
+import scala.annotation.target.setter
+import scala.annotation.target.getter
+import org.eclipse.core.databinding.DataBindingContext
 import org.scalatest.matchers.{MustMatchers}
 
 import org.junit.Test
@@ -99,9 +102,8 @@ class SWTBuilderTest extends MustMatchers with SWTBuilder {
 	  }
 	}
 
-	val binding = emptyBinding()
-
-	private def performTextedControlWithBindingTest(control: => Control, expectedText: String) {
+	private def performTextedControlWithBindingTest(control: => Control, expectedText: String)
+	(binding: Control => DataBindingContext) {
 	  performInShell {
 	    val c = performTextedControlCheck(control, expectedText)
 	    bindings must have size (1)
@@ -111,15 +113,26 @@ class SWTBuilderTest extends MustMatchers with SWTBuilder {
 	}
 
 	@Test def testCreateTextField() {
-		performTextedControlWithBindingTest(edit(binding, text("Title")), "Title")
+		val binding = emptyBinding()
+		performTextedControlWithBindingTest(edit(binding, text("Title")), "Title")(binding)
+	}
+	
+	@Test def testCreateTextFieldWidthNonEmptyBinding() {
+		object Person {
+			var name: String = "Name"
+		}
+		val binding = (c: Control) => bind(Person.name_=, Person.name _)(c);
+		performTextedControlWithBindingTest(edit(binding, text("Name")), "Name")(binding)
 	}
  
 	@Test def testCreateRadioButton() {
-	  performTextedControlWithBindingTest(radioButton(binding, title("Title")), "Title")
+		val binding = emptyBinding()
+	  performTextedControlWithBindingTest(radioButton(binding, title("Title")), "Title")(binding)
 	}
  
 	@Test def testCreateCheckBox() {
-	  performTextedControlWithBindingTest(checkBox(binding, title("Title")), "Title")
+		val binding = emptyBinding()
+	  performTextedControlWithBindingTest(checkBox(binding, title("Title")), "Title")(binding)
 	}
  
 	@Test def testCreateButton() {
@@ -136,6 +149,7 @@ class SWTBuilderTest extends MustMatchers with SWTBuilder {
 	}
  
 	@Test def testCreateSpinner() {
-	  performTextedControlWithBindingTest(spinner(binding), "0")
+		val binding = emptyBinding()
+	  performTextedControlWithBindingTest(spinner(binding), "0")(binding)
 	}
 }
