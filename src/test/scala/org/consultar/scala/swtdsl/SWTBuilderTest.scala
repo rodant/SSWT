@@ -102,8 +102,9 @@ class SWTBuilderTest extends MustMatchers with SWTBuilder {
 	  }
 	}
 
-	private def performTextedControlWithBindingTest(control: => Control, expectedText: String)
-	(binding: Control => DataBindingContext) {
+	private val binding = emptyBinding();
+	
+	private def performTextedControlWithBindingTest(control: => Control, expectedText: String) {
 	  performInShell {
 	    val c = performTextedControlCheck(control, expectedText)
 	    bindings must have size (1)
@@ -113,26 +114,15 @@ class SWTBuilderTest extends MustMatchers with SWTBuilder {
 	}
 
 	@Test def testCreateTextField() {
-		val binding = emptyBinding()
-		performTextedControlWithBindingTest(edit(binding, text("Title")), "Title")(binding)
-	}
-	
-	@Test def testCreateTextFieldWidthNonEmptyBinding() {
-		object Person {
-			var name: String = "Name"
-		}
-		val binding = (c: Control) => bind(Person.name_=, Person.name _)(c);
-		performTextedControlWithBindingTest(edit(binding, text("Name")), "Name")(binding)
+		performTextedControlWithBindingTest(edit(binding, text("Title")), "Title")
 	}
  
 	@Test def testCreateRadioButton() {
-		val binding = emptyBinding()
-	  performTextedControlWithBindingTest(radioButton(binding, title("Title")), "Title")(binding)
+	  performTextedControlWithBindingTest(radioButton(binding, title("Title")), "Title")
 	}
  
 	@Test def testCreateCheckBox() {
-		val binding = emptyBinding()
-	  performTextedControlWithBindingTest(checkBox(binding, title("Title")), "Title")(binding)
+	  performTextedControlWithBindingTest(checkBox(binding, title("Title")), "Title")
 	}
  
 	@Test def testCreateButton() {
@@ -149,7 +139,6 @@ class SWTBuilderTest extends MustMatchers with SWTBuilder {
 	}
  
 	@Test def testCreateSpinner() {
-		val binding = emptyBinding()
-	  performTextedControlWithBindingTest(spinner(binding), "0")(binding)
+	  performTextedControlWithBindingTest(spinner(binding), "0")
 	}
 }
